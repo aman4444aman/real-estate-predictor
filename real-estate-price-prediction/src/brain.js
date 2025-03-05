@@ -3,13 +3,21 @@ import data from "./data/real_estate_dataset.json";
 
 const net = new brain.NeuralNetwork();
 
+// Mapping city names to numerical values
+const locationMapping = {
+  "Toronto": 1,
+  "Vancouver": 2,
+  "Montreal": 3,
+  "Ottawa": 4,
+};
+
 export const trainModel = () => {
   const trainingData = data.map((item) => ({
     input: {
       area: item.area / 5000,
       bedrooms: item.bedrooms / 5,
       bathrooms: item.bathrooms / 5,
-      location: item.location / 10,
+      location: locationMapping[item.location] / 4, // Normalize between 1-4
       age: item.age / 100,
     },
     output: { price: item.price / 1000000 },
@@ -23,7 +31,7 @@ export const predictPrice = (inputData) => {
     area: inputData.area / 5000,
     bedrooms: inputData.bedrooms / 5,
     bathrooms: inputData.bathrooms / 5,
-    location: inputData.location / 10,
+    location: locationMapping[inputData.location] / 4, // Normalize between 1-4
     age: inputData.age / 100,
   };
   const output = net.run(normalizedInput);
