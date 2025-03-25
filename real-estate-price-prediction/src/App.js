@@ -34,7 +34,7 @@ function App() {
           <button className="btn btn-primary w-100" onClick={handleTrain}>
             {trained ? "Model Trained" : "Train Model"}
           </button>
-        </div>
+        </div> 
         
         <div className="card">
           <h2 className="text-center mb-4">Enter Property Details</h2>
